@@ -20,7 +20,10 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
     private int ballXdir = -1;
     private int ballYdir = -2;
 
+    private MapGenerator map;
+
     public GamePlay(){
+        map = new MapGenerator(3,7);
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
@@ -32,6 +35,8 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
         // 1. Paint the entire background black first! (Assuming your window size is roughly 692x592)
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, 700, 600);
+
+        map.draw((Graphics2D)g);
 
         // 2. (Optional) If you still want those wall lines to be a different color,
         // you can draw them here, or remove them if you don't want them.
