@@ -36,9 +36,9 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
         // 2. (Optional) If you still want those wall lines to be a different color,
         // you can draw them here, or remove them if you don't want them.
         g.setColor(Color.DARK_GRAY); // or BLACK if you want them invisible
-        g.fillRect(0, 0, 3, 597);
-        g.fillRect(0, 0, 697, 3);
-        g.fillRect(697, 0, 3, 592);
+        g.fillRect(0, 0, 5, 595);
+        g.fillRect(0, 0, 695, 5);
+        g.fillRect(697, 0, 5, 590);
 
         // 3. Draw the paddle
         g.setColor(Color.WHITE);
@@ -65,6 +65,26 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         timer.start();
+        repaint();
+        //Ball - Pedal interaction
+        if(isRUnning){
+            if(new Rectangle(ballposX, ballposY, 20, 30).intersects(new Rectangle(playerX, 550, 100, 8))){
+                ballYdir=-ballYdir;
+            }
+            ballposX+=ballXdir;
+            ballposY+=ballYdir;
+            if(ballposX<0){
+                ballXdir=-ballXdir;
+            }
+            if(ballposY<0){
+                ballYdir=-ballYdir;
+            }
+
+            if(ballposX>670){
+                ballXdir=-ballXdir;
+            }
+
+        }
         repaint();
     }
 
