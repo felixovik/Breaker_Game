@@ -10,13 +10,12 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
 
     private boolean isRUnning = false;
     private int score = 0;
-    private int brickIncrement = 7;
     private int gameLevel = 0;
     private int totalBricks = 21;
     private Timer timer;
     private int delay = 6;
     private boolean win = false;
-
+    SoundManager sd = new SoundManager();
     private int playerX=310;
 
     private int ballposX=120;
@@ -70,7 +69,7 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
 
             g.setColor(Color.GREEN);
             g.setFont(new Font("serif", Font.BOLD, 30));
-            g.drawString("YOU WON! :)", 190,100);
+            g.drawString("Level Complete! :)", 190,100);
             g.drawString("Score: " + score, 190, 250);
 
             g.setFont(new Font("serif", Font.BOLD, 25));
@@ -154,6 +153,7 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
                         if(ballRect.intersects(brickRect)){
                             map.setBrickValue(0, i, j);
                             totalBricks--;
+                            sd.playBrickSound();
                             score+=5;
                             if(ballposX+19<=brickRect.x || ballposX+1>=brickRect.x + brickRect.width){
                                 ballXdir = -ballXdir;
